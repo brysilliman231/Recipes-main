@@ -1,3 +1,3 @@
 from flask import Flask
 app = Flask(__name__)
-app.secret_key = "Moms homecooking is the best"
+app.secret_key = "volkswagen"
