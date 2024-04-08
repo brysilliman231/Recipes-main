@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>{{user.first_name}}'s Dashboard</title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <span class="navbar-brand mb-0 h1">Welcome, {{user.first_name}}</span>
+        <form action="/logout" method="POST" class="form-inline">
+            <button type="submit" class="btn btn-outline-danger" name="logout">Logout</button>
+        </form>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>All Posted Recipes:</h2>
+            <a href="/create" class="btn btn-primary">+ Create</a>
+        </div>
+
+        <div class="row">
+            {% for recipe in user.recipes %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{recipe.name}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Under 30 min: {{recipe.under_30}}</h6>
+                        <p class="card-text">Posted By: {{user.first_name}} {{user.last_name}}</p>
+                        <a href="/view/recipe/{{recipe.id}}" class="card-link">View Recipe</a>
+                        <a href="/edit/recipe/{{recipe.id}}" class="card-link btn btn-warning">Edit</a>
+                        <form action="/delete/recipe/{{recipe.id}}" method="POST" style="display: inline;">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
